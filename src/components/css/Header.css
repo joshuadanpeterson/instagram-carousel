@@ -1,0 +1,16 @@
+/* Header.css */
+
+.header {
+	width: 100%;
+	padding: 20px 0;
+	background-color: #f3f4f6; /* or any color that fits your design */
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	text-align: center;
+}
+
+.header-title {
+	margin: 0;
+	color: #333; /* or any color that fits your design */
+	font-size: 2.5rem;
+	font-weight: 300;
+}

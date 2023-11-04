@@ -1,0 +1,84 @@
+/* InstagramFeed.css */
+
+*/
+
+.carousel {
+	max-width: 600px; /* Or whatever maximum width you prefer */
+	width: 100%; /* This will make it responsive */
+	margin: 0 auto; /* This centers it horizontally */
+	box-sizing: border-box; /* Ensures padding doesn't affect width */
+	display: flex; /* Enables flexbox properties for center alignment */
+	flex-direction: column; /* Stack children vertically */
+	justify-content: center; /* Centers content vertically in the carousel */
+	align-items: center; /* Centers content horizontally in the carousel */
+	overflow: hidden; /* Prevents content from bleeding outside the container */
+}
+
+.carousel .slide {
+position: relative;
+width: 100%; /* Slide takes up the full width of .carousel */
+box-sizing: border-box; /* Ensures padding doesn't affect width */
+/* Maintain aspect ratio for the slide */
+padding-bottom: 56.25%; /* Aspect ratio padding for 16:9 */
+overflow: hidden; /* Prevents content from bleeding outside the slide */
+}
+
+.carousel img {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%; /* Make the image fill the width of the slide */
+height: 100%; /* Make the image fill the height of the slide */
+object-fit: cover; /* This will ensure the image covers the slide area without stretching */
+padding: 5%;
+}
+
+.caption-card {
+position: absolute;
+bottom: 9%; /* Position above the bottom of the slide */
+left: 50%;
+transform: translateX(-50%); /* Center horizontally */
+background: rgba(0, 0, 0, 0.5); /* Semi-transparent */
+color: white;
+width: 90%; /* Adjust width as necessary, with some padding */
+padding: 10px;
+text-align: center;
+opacity: 0; /* Start with the caption card invisible */
+transition: opacity 0.3s ease; /* Smooth transition for hover effect */
+pointer-events: none; /* Ensures the mouse event passes through to the image */
+}
+
+.carousel .slide:hover .caption-card {
+opacity: 1; /* Show the caption on hover */
+pointer-events: auto; /* Allow clicking on the caption */
+}
+
+.caption-link {
+color: white;
+text-decoration: none;
+width: 100%; /* Ensure the link fills the caption card */
+}
+
+/* Ensure that thumbnails are visible and styled */
+.carousel .thumbs-wrapper {
+display: block;
+margin-top: 10px; /* Space above the thumbnails */
+}
+
+.carousel .thumbs {
+display: flex;
+justify-content: center; /* Center thumbnails horizontally */
+flex-wrap: wrap; /* Allow thumbnails to wrap onto the next line */
+}
+
+.carousel .thumb {
+margin: 0 5px; /* Space between thumbnails */
+cursor: pointer; /* Change cursor to pointer on hover */
+opacity: 0.75; /* Slightly transparent to indicate inactive state */
+transition: opacity 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.carousel .thumb.selected,
+.carousel .thumb:hover {
+opacity: 1; /* Fully opaque to indicate active state or hover */
+}

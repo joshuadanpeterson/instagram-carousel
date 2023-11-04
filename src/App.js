@@ -1,25 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import InstagramFeed from './components/js/InstagramFeed'; // Adjust the path as necessary
+import Footer from './components/js/Footer';
+import Header from './components/js/Header'; // Import the Header component
 
-function App() {
+const App = () => {
+  // Here you can define your access token or get it from .env
+  const accessToken = process.env.REACT_APP_INSTAGRAM_ACCESS_TOKEN;
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <InstagramFeed accessToken={accessToken} /> {/* Pass the accessToken as a prop to the InstagramFeed component */}
+      <Footer />
     </div>
   );
-}
+};
 
 export default App;
