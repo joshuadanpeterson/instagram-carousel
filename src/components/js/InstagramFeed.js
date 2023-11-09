@@ -71,7 +71,7 @@ const InstagramFeed = ({ accessToken }) => {
 				// Remove the hover effect when the mouse leaves
 				if (index === currentSlide) {
 					setHoveredSlide(null);
-				}
+					}
 				}}
 			>
 				<img src={post.media_url} alt={`Instagram post ${index + 1}`} />
@@ -90,47 +90,40 @@ const InstagramFeed = ({ accessToken }) => {
 					</a>
 				</div>
 
-				{/* Play/Pause button */}
-				<button
-					type="button"
-					className={`play-pause-button ${
-						hoveredSlide === index ? "visible" : "hidden"
-					}`}
-					onClick={togglePlayPause}
-				>
-					<i
-						className={`fas ${
-							isAutoplayed ? "fa-pause" : "fa-play"
-						}`}
-					></i>
-				</button>
+				{/* Conditionally render the navigation buttons based on hover and active slide */}
+				{hoveredSlide === index && index === currentSlide && (
+					<>
+						<button
+							type="button"
+							className="slide-nav-button prev-button"
+							onClick={(event) => goToPreviousSlide(event)}
+						>
+							<i className="fas fa-chevron-left"></i>
+						</button>
+						<button
+							type="button"
+							className="slide-nav-button next-button"
+							onClick={(event) => goToNextSlide(event)}
+						>
+							<i className="fas fa-chevron-right"></i>
+						</button>
+					</>
+				)}
 
-				{/* Previous button */}
-				<button
-					type="button"
-					className={`slide-nav-button prev-button ${
-						hoveredSlide === index ? "visible" : "hidden"
-					}`}
-					onClick={(event) => goToPreviousSlide(event)}
-				>
-					<i className="fas fa-chevron-left"></i>
-					</button>
-
-				{/* Next button */}
-				<button
-					type="button"
-					className={`slide-nav-button next-button ${
-						hoveredSlide === index ? "visible" : "hidden"
-					}`}
-					onClick={(event) => goToNextSlide(event)}
-				>
-					<i className="fas fa-chevron-right"></i>
-				</button>
-
-			</div>
-		),
-		onClick: () => setCurrentSlide(index),
-	}));
+				{/* Play/Pause button, also only visible for the top slide */}
+				{hoveredSlide === index && index === currentSlide && (
+						<button
+						type="button"
+						className="play-pause-button"
+						onClick={togglePlayPause}
+						>
+						<i className={`fas ${isAutoplayed ? "fa-pause" : "fa-play"}`}></i>
+						</button>
+				)}
+				</div>
+			),
+			onClick: () => setCurrentSlide(index),
+			}));
 
 	return (
 		<div style={{ width: "80%", height: "500px", margin: "0 auto" }}>
@@ -140,6 +133,7 @@ const InstagramFeed = ({ accessToken }) => {
 				offsetRadius={2}
 				showNavigation={false}
 				animationConfig={config.gentle}
+				autoPlay={true}
 			/>
 		</div>
 	);
