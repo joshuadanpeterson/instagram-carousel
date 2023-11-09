@@ -1,45 +1,138 @@
 import React, { useState, useEffect } from "react";
-import { Carousel } from "react-responsive-carousel";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
-import '../css/InstagramFeed.css'; // Make sure this is the correct path to your CSS file
+import Carousel from "react-spring-3d-carousel";
+import { v4 as uuidv4 } from "uuid";
+import { config } from "react-spring";
+import "../css/InstagramFeed.css";
+import "../css/NavigationButtons.css";
 
 const InstagramFeed = ({ accessToken }) => {
-    const [posts, setPosts] = useState([]);
+	const [posts, setPosts] = useState([]);
+	const [currentSlide, setCurrentSlide] = useState(0);
+	const [hoveredSlide, setHoveredSlide] = useState(null);
+	const [isAutoplayed, setIsAutoplayed] = useState(false);
 
-    useEffect(() => {
-        fetch(
-            `https://graph.instagram.com/me/media?fields=id,media_type,permalink,media_url,caption&access_token=${accessToken}`
-        )
-        .then((response) => response.json())
-        .then((data) => {
-            setPosts(data.data);
-        });
-    }, [accessToken]);
+	useEffect(() => {
+		fetch(
+			`https://graph.instagram.com/me/media?fields=id,media_type,permalink,media_url,caption&access_token=${accessToken}`
+		)
+			.then((response) => response.json())
+			.then((data) => {
+				setPosts(data.data);
+			});
+	}, [accessToken]);
 
-    return (
-        <Carousel 
-			showArrows={true} 
-			dynamicHeight={false} 
-			infiniteLoop={true} 
-			autoPlay={true}
-			showThumbs={false}>
-            {posts.map((post) => (
-                <div key={post.id} className="carousel-slide-container">
-                    <img src={post.media_url} alt="Instagram post" />
-                    <div className="caption-card">
-                        <a
-                            href={post.permalink}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="caption-link"
-                        >
-                            {post.caption}
-                        </a>
-                    </div>
-                </div>
-            ))}
-        </Carousel>
-    );
+	// Autoplay functionality
+	useEffect(() => {
+		let autoplayInterval;
+		if (isAutoplayed && posts.length > 0) {
+			autoplayInterval = setInterval(() => {
+				setCurrentSlide(
+					(currentSlide) => (currentSlide + 1) % posts.length
+				);
+			}, 3000); // Change slide every 3 seconds
+		}
+		return () => {
+			clearInterval(autoplayInterval);
+		};
+	}, [isAutoplayed, posts.length, currentSlide]);
+
+	// Handler to toggle play/pause
+	const togglePlayPause = () => {
+		console.log("togglePlayPause clicked");
+		setIsAutoplayed(!isAutoplayed);
+	};
+
+	// Function to go to the previous slide
+	const goToPreviousSlide = (event) => {
+		event.stopPropagation();
+		console.log("Previous button clicked"); // Add this line to check if the function is called
+		setCurrentSlide(currentSlide > 0 ? currentSlide - 1 : posts.length - 1);
+	};
+
+	// Function to go to the next slide
+	const goToNextSlide = (event) => {
+		event.stopPropagation();
+		console.log("Next button clicked"); // Add this line to check if the function is called
+		setCurrentSlide((currentSlide + 1) % posts.length);
+	};
+
+	const slides = posts.map((post, index) => ({
+		key: uuidv4(),
+		content: (
+			<div
+				className="carousel-slide-container"
+				onMouseEnter={() => setHoveredSlide(index)}
+				onMouseLeave={() => setHoveredSlide(null)}
+			>
+				<img src={post.media_url} alt={`Instagram post ${index + 1}`} />
+				<div
+					className={`caption-card ${
+						hoveredSlide === index ? "visible" : ""
+					}`}
+				>
+					<a
+						href={post.permalink}
+						target="_blank"
+						rel="noopener noreferrer"
+						className="caption-link"
+					>
+						{post.caption}
+					</a>
+				</div>
+
+				{/* Play/Pause button */}
+				<button
+					type="button"
+					className={`play-pause-button ${
+						hoveredSlide === index ? "visible" : "hidden"
+					}`}
+					onClick={togglePlayPause}
+				>
+					<i
+						className={`fas ${
+							isAutoplayed ? "fa-pause" : "fa-play"
+						}`}
+					></i>
+				</button>
+
+				{/* Previous button */}
+				<button
+					type="button"
+					className={`slide-nav-button prev-button ${
+						hoveredSlide === index ? "visible" : "hidden"
+					}`}
+					onClick={(event) => goToPreviousSlide(event)}
+				>
+					<i className="fas fa-chevron-left"></i>
+					</button>
+
+				{/* Next button */}
+				<button
+					type="button"
+					className={`slide-nav-button next-button ${
+						hoveredSlide === index ? "visible" : "hidden"
+					}`}
+					onClick={(event) => goToNextSlide(event)}
+				>
+					<i className="fas fa-chevron-right"></i>
+				</button>
+
+			</div>
+		),
+		onClick: () => setCurrentSlide(index),
+	}));
+
+	return (
+		<div style={{ width: "80%", height: "500px", margin: "0 auto" }}>
+			<Carousel
+				slides={slides}
+				goToSlide={currentSlide}
+				offsetRadius={2}
+				showNavigation={false}
+				animationConfig={config.gentle}
+			/>
+		</div>
+	);
 };
 
 export default InstagramFeed;

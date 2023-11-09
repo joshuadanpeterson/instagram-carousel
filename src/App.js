@@ -10,7 +10,11 @@ const App = () => {
   return (
     <div className="App">
       <Header />
-      <InstagramFeed accessToken={accessToken} /> {/* Pass the accessToken as a prop to the InstagramFeed component */}
+      <div className="InstagramFeed-container">
+        <div className="InstagramFeed">
+          <InstagramFeed accessToken={accessToken} /> {/* Pass the accessToken as a prop to the InstagramFeed component */}
+        </div>
+      </div>
       <Footer />
     </div>
   );
