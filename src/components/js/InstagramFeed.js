@@ -61,8 +61,18 @@ const InstagramFeed = ({ accessToken }) => {
 		content: (
 			<div
 				className="carousel-slide-container"
-				onMouseEnter={() => setHoveredSlide(index)}
-				onMouseLeave={() => setHoveredSlide(null)}
+				onMouseEnter={() => {
+				// Only trigger the hover effect if the hovered slide is the current slide
+				if (index === currentSlide) {
+					setHoveredSlide(index);
+				}
+				}}
+				onMouseLeave={() => {
+				// Remove the hover effect when the mouse leaves
+				if (index === currentSlide) {
+					setHoveredSlide(null);
+				}
+				}}
 			>
 				<img src={post.media_url} alt={`Instagram post ${index + 1}`} />
 				<div
