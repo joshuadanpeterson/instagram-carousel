@@ -1,0 +1,127 @@
+/* Styles specific to the PostCard component */
+
+.card {
+	width: 100%;
+	height: auto;
+	transform: rotateY(0deg);
+	backface-visibility: hidden;
+}
+
+.card img {
+	position: relative;
+	width: 100%;
+	height: auto;
+	display: block;
+	object-fit: cover;
+	pointer-events: none;
+}
+
+.caption-card {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%; /* Full width of its container */
+	min-height: 15vh; /* Increase min-height for more text */
+	background: rgba(0, 0, 0, 0.5);
+	color: white;
+	padding: 1em;
+	text-align: center;
+	opacity: 0; /* Start with caption card invisible */
+	transition: opacity 0.5s ease;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	overflow: visible; /* Changed from hidden to visible */
+	white-space: normal; /* Allow text wrapping */
+	word-wrap: break-word; /* Break words to prevent overflow */
+	text-rendering: optimizeLegibility; /* Improve text rendering */
+	transform-style: preserve-3d; /* Preserve 3D for child elements */
+	box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.25); /* Adjust as needed */
+}
+
+.caption-link {
+	color: inherit; /* Ensures the link uses the color of the parent element */
+	transition: color 0.3s ease, opacity 0.3s ease; /* Smooth transition for color and opacity */
+	text-decoration: none;
+	display: block; /* Ensure it takes up the full width of its container */
+	text-align: center; /* Center the text within the card */
+	word-break: break-all; /* Prevent overflow by breaking long words */
+	font-size: clamp(
+		0.75rem,
+		2.5vw,
+		0.9rem
+	); /* Adjust clamp values if needed */
+	padding: 0.5% 1%; /* Use percentages for responsive padding */
+	margin: 0 auto; /* Center it within the card */
+	opacity: 0.7;
+	cursor: pointer; /* Indicates the link is clickable */
+
+
+}
+
+.caption-link {
+	color: rgba(
+		255,
+		255,
+		255,
+		0.7
+	) !important; /* White text with 70% opacity */
+	/* ... other styles ... */
+}
+
+.caption-card.visible,
+.card:hover .caption-card {
+	opacity: 1;
+}
+
+.caption-link:hover,
+.caption-link:focus,
+.caption-link:active {
+	color: white;
+}
+
+.caption-link:hover {
+    text-decoration: underline; /* Adds underline on hover for better UX */
+	opacity: 1; /* Ensure the link is fully opaque when hovered */
+}
+
+.caption-card.hovered {
+	opacity: 1;
+}
+
+/* Styles for screens wider than 768px */
+@media (min-width: 768px) {
+	.caption-card {
+		width: 100%;
+		margin: 0 auto;
+	}
+}
+
+/* Styles for screens narrower than 1200px */
+@media (max-width: 1200px) {
+	.caption-card {
+		width: 80%;
+		margin: 0 auto;
+		padding: 0;
+	}
+}
+
+/* Styles for screens narrower than 1024px */
+@media (max-width: 1024px) {
+	.caption-card {
+		width: 90%;
+		margin: 0 auto;
+		padding: 0;
+	}
+}
+
+/* Styles for screens narrower than 768px */
+@media (max-width: 768px) {
+	.caption-card {
+		width: 100%;
+		margin: 0 auto;
+		padding: 5%;
+	}
+}

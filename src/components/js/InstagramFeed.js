@@ -1,15 +1,29 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, forwardRef, useImperativeHandle } from "react";
 import Carousel from "react-spring-3d-carousel";
 import { v4 as uuidv4 } from "uuid";
 import { config } from "react-spring";
-import "../css/InstagramFeed.css";
+import { styled } from "@mui/system";
+import { Grid } from "@mui/material";
+
+import PostCard from "./PostCard"; // Import PostCard component
+// 
+import "../css/InstagramCarousel.css";
 import "../css/NavigationButtons.css";
 
-const InstagramFeed = ({ accessToken }) => {
+const CarouselWrapper = styled("div")({
+	display: "flex",
+	justifyContent: "center", // Centers the cards horizontally
+	alignItems: "center", // Centers the cards vertically
+	minHeight: "100vh", // Make sure it takes at least the full height of the viewport
+	perspective: "1000px", // Adjust as needed for 3D effect
+});
+
+const InstagramFeed = forwardRef(({ accessToken }, ref) => {
+
 	const [posts, setPosts] = useState([]);
 	const [currentSlide, setCurrentSlide] = useState(0);
 	const [hoveredSlide, setHoveredSlide] = useState(null);
-	const [isAutoplayed, setIsAutoplayed] = useState(false);
+	const [isAutoplayed, setIsAutoplayed] = useState(true); // Initialize this as true if you want autoplay by default
 
 	useEffect(() => {
 		fetch(
@@ -31,112 +45,97 @@ const InstagramFeed = ({ accessToken }) => {
 				);
 			}, 3000); // Change slide every 3 seconds
 		}
-		return () => {
-			clearInterval(autoplayInterval);
-		};
+		return () => clearInterval(autoplayInterval);
 	}, [isAutoplayed, posts.length, currentSlide]);
 
-	// Handler to toggle play/pause
-	const togglePlayPause = () => {
-		console.log("togglePlayPause clicked");
-		setIsAutoplayed(!isAutoplayed);
-	};
-
-	// Function to go to the previous slide
-	const goToPreviousSlide = (event) => {
-		event.stopPropagation();
-		console.log("Previous button clicked"); // Add this line to check if the function is called
+	const goToPreviousSlide = () => {
 		setCurrentSlide(currentSlide > 0 ? currentSlide - 1 : posts.length - 1);
 	};
 
-	// Function to go to the next slide
-	const goToNextSlide = (event) => {
-		event.stopPropagation();
-		console.log("Next button clicked"); // Add this line to check if the function is called
+	const goToNextSlide = () => {
 		setCurrentSlide((currentSlide + 1) % posts.length);
 	};
 
-	const slides = posts.map((post, index) => ({
-		key: uuidv4(),
-		content: (
-			<div
-				className="carousel-slide-container"
-				onMouseEnter={() => {
-				// Only trigger the hover effect if the hovered slide is the current slide
-				if (index === currentSlide) {
-					setHoveredSlide(index);
-				}
-				}}
-				onMouseLeave={() => {
-				// Remove the hover effect when the mouse leaves
-				if (index === currentSlide) {
-					setHoveredSlide(null);
-					}
-				}}
-			>
-				<img src={post.media_url} alt={`Instagram post ${index + 1}`} />
-				<div
-					className={`caption-card ${
-						hoveredSlide === index ? "visible" : ""
-					}`}
-				>
-					<a
-						href={post.permalink}
-						target="_blank"
-						rel="noopener noreferrer"
-						className="caption-link"
-					>
-						{post.caption}
-					</a>
-				</div>
+	const togglePlayPause = () => {
+		setIsAutoplayed(!isAutoplayed);
+	};
 
-				{/* Conditionally render the navigation buttons based on hover and active slide */}
-				{hoveredSlide === index && index === currentSlide && (
-					<>
-						<button
-							type="button"
-							className="slide-nav-button prev-button"
-							onClick={(event) => goToPreviousSlide(event)}
-						>
-							<i className="fas fa-chevron-left"></i>
-						</button>
-						<button
-							type="button"
-							className="slide-nav-button next-button"
-							onClick={(event) => goToNextSlide(event)}
-						>
-							<i className="fas fa-chevron-right"></i>
-						</button>
-					</>
-				)}
+	useImperativeHandle(ref, () => ({
+		goToPreviousSlide,
+		goToNextSlide,
+		togglePlayPause,
+	}));
 
-				{/* Play/Pause button, also only visible for the top slide */}
-				{hoveredSlide === index && index === currentSlide && (
-						<button
-						type="button"
-						className="play-pause-button"
-						onClick={togglePlayPause}
-						>
-						<i className={`fas ${isAutoplayed ? "fa-pause" : "fa-play"}`}></i>
-						</button>
-				)}
-				</div>
-			),
-			onClick: () => setCurrentSlide(index),
-			}));
+	// Modify your slides to use PostCard
+	const slides = posts
+		.map((post, index) => {
+			if (index === currentSlide) {
+				return {
+					key: uuidv4(),
+					content: (
+						<PostCard
+							post={post}
+							cardSize={{ width: "300%", height: "auto" }}
+							hovered={hoveredSlide === index}
+							isCurrent={true}
+							onMouseEnter={() => setHoveredSlide(index)}
+							onMouseLeave={() => setHoveredSlide(null)}
+							onPrevClick={goToPreviousSlide}
+							onNextClick={goToNextSlide}
+							onPlayPauseClick={togglePlayPause}
+							isAutoplayed={isAutoplayed}
+						/>
+					),
+					onClick: () => setCurrentSlide(index),
+				};
+			} else if (
+				index === (currentSlide + 1) % posts.length ||
+				index === (currentSlide - 1 + posts.length) % posts.length
+			) {
+				return {
+					key: uuidv4(),
+					content: (
+						<PostCard
+							post={post}
+							cardSize={{ width: "300px", height: "auto" }}
+							hovered={hoveredSlide === index}
+							isCurrent={false}
+							onMouseEnter={() => setHoveredSlide(index)}
+							onMouseLeave={() => setHoveredSlide(null)}
+							onPrevClick={goToPreviousSlide}
+							onNextClick={goToNextSlide}
+							onPlayPauseClick={togglePlayPause}
+							isAutoplayed={isAutoplayed}
+						/>
+					),
+					onClick: () => setCurrentSlide(index),
+				};
+			} else {
+				return null;
+			}
+		})
+		.filter((slide) => slide !== null); // Filter out null slides
 
 	return (
-		<div style={{ width: "80%", height: "500px", margin: "0 auto" }}>
-			<Carousel
-				slides={slides}
-				goToSlide={currentSlide}
-				offsetRadius={2}
-				showNavigation={false}
-				animationConfig={config.gentle}
-				autoPlay={true}
-			/>
-		</div>
+		<CarouselWrapper style={{ marginLeft: "auto", marginRight: "auto" }}>
+			<Grid
+				container
+				spacing={2} // Use a number for spacing
+				justifyContent="center"
+				alignItems="center"
+				style={{ height: "100%" }}
+			>
+				<Carousel
+					slides={slides}
+					goToSlide={currentSlide}
+					offsetRadius={2}
+					showNavigation={false}
+					animationConfig={config.gentle}
+					autoPlay={isAutoplayed} // Use the state variable here
+				/>
+			</Grid>
+		</CarouselWrapper>
 	);
-};
+});
 
 export default InstagramFeed;

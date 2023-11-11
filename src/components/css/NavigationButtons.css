@@ -1,5 +1,6 @@
 /* Navigation Buttons Styles */
 
+
 /* Play/Pause Button */
 .play-pause-button {
 	display: none;
@@ -7,27 +8,24 @@
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	background-color: rgba(
-		255,
-		255,
-		255,
-		0.3
-	); /* Light background for visibility */
+	background-color: rgba(255, 255, 255, 0.3); /* Slightly transparent white */	
 	border: none;
 	border-radius: 50%; /* Circular button */
-	width: 50px; /* Fixed size */
-	height: 50px; /* Fixed size */
+	width: 35px; /* Fixed size */
+	height: 35px; /* Fixed size */
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	font-size: 2rem;
-	color: rgba(255, 255, 255, 0.3);
+	color: rgba(45, 6, 6, 0.344);	
 	cursor: pointer;
 	z-index: 10;
+	font-size: 38px;
+	margin-top: 10px;
 }
 
 .play-pause-button:hover {
-	background-color: rgba(255, 255, 255, 0.5); /* Slightly darker on hover */
+	background-color: rgba(132, 126, 126, 0.499); /* Slightly darker on hover */
 }
 
 /* Show the button when the slide is hovered */
@@ -43,32 +41,43 @@
 	display: block; /* or 'inline-block', depending on your design */
 }
 
+/* Base styles for both buttons */
 .slide-nav-button {
-	display: none;
+	display: flex; /* Change this to always display the buttons */
 	position: absolute;
 	top: 50%;
 	transform: translateY(-50%);
-	/* Additional styling */
-	background-color: rgba(255, 255, 255, 0.3);
+	background-color: rgba(48, 2, 2, 0.1); /* Slightly transparent white */
+	color: rgba(45, 6, 6, 0.344);	
 	border: none;
 	border-radius: 50%;
-	width: 40px; /* Adjust as needed */
-	height: 40px; /* Adjust as needed */
+	width: 40px;
+	height: 35px;
 	align-items: center;
 	justify-content: center;
 	cursor: pointer;
 	z-index: 10;
+	font-size: 38px;
+	margin-top: 10px;
 }
 
-.prev-button {
+.slide-nav-button.visible {
+	display: flex !important; /* Make sure this overrides any other display property */
+}
+
+/* Specific styles for previous button */
+.slide-nav-button.prev-button {
 	left: 10%; /* Adjust as needed */
 }
 
-.next-button {
+/* Specific styles for next button */
+.slide-nav-button.next-button {
 	right: 10%; /* Adjust as needed */
 }
 
 /* Show the navigation buttons when the slide is hovered */
-.carousel-slide-container:hover .slide-nav-button {
+.carousel-slide-container:hover .slide-nav-button:hover {
 	display: flex;
+	background-color: rgba(132, 126, 126, 0.499); /* Slightly darker on hover */
 }
+

@@ -1,0 +1,98 @@
+/* InstagramCarousel.css */
+
+
+.carousel-container {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: auto; /* Adjust as needed */
+	margin: auto;
+	position: relative;
+}
+
+.carousel {
+	width: 100%;
+	max-height: 100%;
+	height: auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
+	perspective: 1000px;
+}
+
+.carousel .slide {
+    position: relative;
+	width: 100%;
+	height: auto; /* Make the height responsive */
+    transition: transform 0.5s ease; /* Smooth transition for movement and rotation */
+    opacity: 0.5; /* Make non-current slides less prominent */
+}
+
+/* Styles for the current slide */
+.carousel .slide.current {
+    transform: translateZ(100px); /* Brings the current slide forward */
+    opacity: 1; /* Fully opaque */
+    z-index: 1; /* Ensures it appears on top */
+}
+
+.carousel img {
+	position: relative;
+	width: 100%;
+	height: auto;
+	display: block;
+	object-fit: cover;
+}
+
+.carousel-navigation-container {
+	position: absolute;
+	top: 50%;
+	left: 0;
+	right: 0;
+	z-index: 10;
+	text-align: center;
+}
+
+.carousel-slide-container {
+	width: 100%;
+	position: relative;
+}
+
+.carousel-slide.previous {
+	transform: translateX(-100%) translateZ(-100px) rotateY(-30deg); /* Adjust translateX and rotateY as needed */
+	opacity: 0.5; /* Lower opacity for slides not in focus */
+}
+
+.carousel-slide.next {
+	transform: translateX(100%) translateZ(-100px) rotateY(30deg); /* Adjust translateX and rotateY as needed */
+	opacity: 0.5; /* Lower opacity for slides not in focus */
+}
+
+.carousel-wrapper {
+	position: relative;
+	padding-bottom: 20px;
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+}
+
+.carousel-wrapper button {
+	width: auto;
+	margin-top: 20px;
+}
+
+/* Ensure the caption card appears on hover over the slide container */
+.carousel-slide-container:hover .caption-card {
+    opacity: 1 !important; /* Full opacity on hover */
+    transform: translateZ(50px); /* Pop out effect on hover */
+}
+
+@media (max-width: 768px) {
+	.carousel-container {
+		height: auto; /* On smaller devices, let the height be automatic */
+		min-height: 50vh; /* But ensure it takes at least half the viewport height */
+	}
+}
+

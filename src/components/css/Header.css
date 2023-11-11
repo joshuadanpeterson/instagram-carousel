@@ -1,17 +1,22 @@
 /* Header.css */
 
-
 .header {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 	width: 100%;
-	padding: 20px 0;
+	padding: 30px 0;
 	background-color: #f3f4f6;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-	text-align: center;
+	margin-bottom: 0; /* Reduce or remove the margin at the bottom of the header */
 }
 
 .header-title {
 	margin: 0;
 	color: #333; /* or any color that fits your design */
 	font-size: 2.5rem;
-	font-weight: 300;
+	/* bold font */
+	font-family: 'Montserrat', sans-serif;
+	font-family: 'Space Grotesk', sans-serif;
 }

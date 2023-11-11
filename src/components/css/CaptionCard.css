@@ -1,0 +1,67 @@
+/* InstagramFeed.css */
+
+.caption-card {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%; /* Full width of its container */
+	min-height: 15vh; /* Increase min-height for more text */
+	background: rgba(0, 0, 0, 0.5);
+	color: white;
+	padding: 20px;
+	text-align: center;
+	transition: opacity 0.5s ease;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	overflow: visible; /* Changed from hidden to visible */
+	white-space: normal; /* Allow text wrapping */
+	word-wrap: break-word; /* Break words to prevent overflow */
+	text-rendering: optimizeLegibility; /* Improve text rendering */
+	transform-style: preserve-3d; /* Preserve 3D for child elements */
+	box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.25); /* Adjust as needed */
+}
+
+.caption-card.visible {
+	opacity: 1 !important; /* Make sure this overrides any other opacity property */
+}
+
+.caption-link {
+	color: rgba(255, 255, 255, 0.7); /* White text with 70% opacity */
+	transition: color 0.3s ease, opacity 0.3s ease; /* Smooth transition for color and opacity */
+	text-decoration: none;
+	display: block; /* Ensure it takes up the full width of its container */
+	text-align: center; /* Center the text within the card */
+	word-break: break-all; /* Prevent overflow by breaking long words */
+	font-size: clamp(
+		0.75rem,
+		2.5vw,
+		0.9rem
+	); /* Adjust clamp values if needed */
+	padding: 0.5% 1%; /* Use percentages for responsive padding */
+	margin: 0 auto; /* Center it within the card */
+	opacity: 0.7;
+	pointer-events: auto; /* Add this line */
+
+}
+
+.caption-link:hover,
+.caption-link:focus,
+.caption-link:active {
+	color: rgba(
+		255,
+		255,
+		255,
+		1
+	) !important; /* Full white color on hover, focus, and active states */
+}
+
+.caption-card.visible,
+.carousel .slide:hover .caption-card,
+.caption-link:hover {
+	opacity: 1;
+	display: block;
+	color: rgba(255, 255, 255, 1); /* Full white text color */
+}

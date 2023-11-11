@@ -1,38 +1,72 @@
+/* App.css */
+
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  justify-content: space-between;
+  height: 105vh; /* This is the default height */
+}
+
+
+.InstagramFeed-container {
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 50px 0;
+  padding: 12%;
+	margin: 50px 0;
+  margin-right: 15%;
+  padding-right: 22%;
+	overflow: hidden;
+	z-index: 1;
+  perspective: 1000px; /* Apply a perspective to give a sense of depth */
+}
+
+.InstagramFeed {
+	width: 75%;
+  height: 115vh; 
+	max-width: 600px;
+	margin: auto;
+  transform-style: preserve-3d; /* This ensures that child elements maintain the 3D space */
+}
+
+/* NavButtons */
+.NavButtons-container {
+  display: flex;
+  flex-direction: row;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  margin-top:-2.5%;
+  margin-bottom: 2.4%; /* Adjust as needed */
+  margin-right: 25%;
+  margin-left: 26.5%;
+  /* position at bottom below InstagramFeed */
+  position: relative;
 }
 
-.App-link {
-  color: #61dafb;
+/* Adjustments for tablets */
+@media (max-width: 768px) {
+  .App, .InstagramFeed-container, .InstagramFeed, .NavButtons-container {
+    height: auto; /* Allow content to determine the height */
+    padding-bottom: 50px; /* Add some space at the bottom */
+  }
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+/* Adjustments for smaller tablets and large phones */
+@media (max-width: 600px) {
+  .App, .InstagramFeed-container, .InstagramFeed, .NavButtons-container {
+    height: auto; /* Allow content to determine the height */
+    padding-bottom: 30px; /* Add some space at the bottom */
   }
 }
+
+/* Adjustments for small phones */
+@media (max-width: 480px) {
+  .App, .InstagramFeed-container, .InstagramFeed, .NavButtons-container {
+    height: auto; /* Allow content to determine the height */
+    padding-bottom: 20px; /* Add some space at the bottom */
+  }
+}
+
