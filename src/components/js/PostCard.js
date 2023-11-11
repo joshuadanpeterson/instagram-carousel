@@ -1,5 +1,5 @@
 // PostCard.js
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Card, CardMedia, CardContent, Grid } from "@mui/material";
 import { styled } from "@mui/system";
 
@@ -45,6 +45,24 @@ const PostCard = ({
   cardSize,
 }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const [fontSize, setFontSize] = useState('1em'); // Initial font size
+  const imageRef = useRef(null); // Reference to the image
+
+  // Function to adjust the font size based on the size of the image
+  const adjustFontSize = () => {
+    if (imageRef.current) {
+      const width = imageRef.current.offsetWidth;
+      const newFontSize = width / 100; // Adjust the divisor to get the desired font size
+      setFontSize(`${newFontSize}px`);
+    }
+  };
+
+  // Adjust the font size whenever the component updates
+  useEffect(() => {
+    adjustFontSize();
+    window.addEventListener('resize', adjustFontSize); // Add a resize event listener
+
+  });
 
   return (
     <>
@@ -65,9 +83,11 @@ const PostCard = ({
               image={post.media_url}
               alt={`Instagram post by ${post.username}`} // Assuming 'username' is a property in 'post'
               sx={{ width: '100%', height: 'auto' }}
+              ref={imageRef}
+              onLoad={adjustFontSize}
             />
             <CardContent>
-              <Caption post={post} isHovered={isHovered} isCurrent={isCurrent} />
+              <Caption post={post} isHovered={isHovered} isCurrent={isCurrent} fontSize={fontSize} />
             </CardContent>
           </div>
         </StyledCard>

@@ -2,13 +2,13 @@
 import React from "react";
 import { Typography } from "@mui/material";
 
-const Caption = ({ post, isHovered, isCurrent }) => (
+const Caption = ({ post, isHovered, isCurrent, fontSize }) => (
 	<Typography
 		variant="body2"
 		color="textSecondary"
 		component="p"
 		className={`caption-card ${isHovered && isCurrent ? "visible" : ""}`}
-		sx={{ position: "absolute", bottom: 0, width: "100%" }}
+		sx={{ position: "absolute", bottom: 0, width: "100%", fontSize: fontSize }}
 	>
 		{/* This anchor tag acts as a caption and a permalink */}
 		<a
