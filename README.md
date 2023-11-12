@@ -149,6 +149,8 @@ To start the application, run:
    npm start
    ```
 
+This will launch the app in development mode. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
 ## Contributing
 
 Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
@@ -159,7 +161,18 @@ Contributions are what make the open-source community such an amazing place to l
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
+## License
 
+Distributed under the MIT License. See [[LICENSE]] for more information.
+
+## Contact
+
+Joshua Peterson - joshuadanpeterson@gmail.com
+
+Project Link: [https://github.com/joshuadanpeterson/instagram-carousel](https://github.com/joshuadanpeterson/instagram-carousel)
+```
+
+This Markdown text can be used directly in your README file on GitHub to display the sections with proper formatting.
 
 
 ---
