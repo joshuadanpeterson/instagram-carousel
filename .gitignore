@@ -6,6 +6,8 @@
 # Firebase cache and hosting files
 /.firebase/
 .firebasehosting.*
+firebase.json
+.firebaserc
 
 # Firebase service account (uncomment if you have one locally)
 # /path/to/your/firebase-service-account.json
