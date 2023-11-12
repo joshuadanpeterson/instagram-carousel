@@ -170,10 +170,6 @@ Distributed under the MIT License. See [[LICENSE]] for more information.
 Joshua Peterson - joshuadanpeterson@gmail.com
 
 Project Link: [https://github.com/joshuadanpeterson/instagram-carousel](https://github.com/joshuadanpeterson/instagram-carousel)
-```
-
-This Markdown text can be used directly in your README file on GitHub to display the sections with proper formatting.
-
 
 ---
 
