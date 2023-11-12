@@ -1,127 +1,120 @@
-/* Styles specific to the PostCard component */
-
+/* General styles for the card component */
 .card {
-	width: 100%;
-	height: auto;
-	transform: rotateY(0deg);
-	backface-visibility: hidden;
+	width: 100%; /* Full width */
+	height: auto; /* Height adjusted to content */
+	transform: rotateY(0deg); /* Initial 3D rotation */
+	backface-visibility: hidden; /* Hide the back face of the card */
 }
 
+/* Styles for the image within the card */
 .card img {
 	position: relative;
-	width: 100%;
-	height: auto;
+	width: 100%; /* Full width of its container */
+	height: auto; /* Height adjusted to content */
 	display: block;
-	object-fit: cover;
-	pointer-events: none;
+	object-fit: cover; /* Ensures the image covers the area without stretching */
+	pointer-events: none; /* Image cannot be interacted with directly */
 }
 
+/* Styles for the caption area at the bottom of the card */
 .caption-card {
 	position: absolute;
-	bottom: 0;
-	left: 0;
+	bottom: 0; /* Align to the bottom of the card */
+	left: 0; /* Align to the left of the card */
 	width: 100%; /* Full width of its container */
-	min-height: 15vh; /* Increase min-height for more text */
-	background: rgba(0, 0, 0, 0.5);
-	color: white;
-	padding: 1em;
-	text-align: center;
+	min-height: 15vh; /* Minimum height for the caption area */
+	background: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+	color: white; /* White text color */
+	padding: 1em; /* Padding around the text */
+	text-align: center; /* Center the text horizontally */
 	opacity: 0; /* Start with caption card invisible */
-	transition: opacity 0.5s ease;
-	box-sizing: border-box;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	overflow: visible; /* Changed from hidden to visible */
-	white-space: normal; /* Allow text wrapping */
+	transition: opacity 0.5s ease; /* Smooth transition for opacity changes */
+	box-sizing: border-box; /* Include padding and border in the element's size */
+	display: flex; /* Use flexbox for positioning child elements */
+	flex-direction: column; /* Stack children vertically */
+	justify-content: center; /* Center children vertically */
+	align-items: center; /* Center children horizontally */
+	overflow: visible; /* Allow content to be visible outside the box */
+	white-space: normal; /* Allow text to wrap to the next line */
 	word-wrap: break-word; /* Break words to prevent overflow */
 	text-rendering: optimizeLegibility; /* Improve text rendering */
-	transform-style: preserve-3d; /* Preserve 3D for child elements */
-	box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.25); /* Adjust as needed */
+	transform-style: preserve-3d; /* Preserve 3D transformations for children */
+	box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.25); /* Shadow for depth effect */
 }
 
+/* Styles for the caption link */
 .caption-link {
-	color: inherit; /* Ensures the link uses the color of the parent element */
+	color: inherit; /* Inherits the color from the parent element */
 	transition: color 0.3s ease, opacity 0.3s ease; /* Smooth transition for color and opacity */
-	text-decoration: none;
-	display: block; /* Ensure it takes up the full width of its container */
-	text-align: center; /* Center the text within the card */
-	word-break: break-all; /* Prevent overflow by breaking long words */
-	font-size: clamp(
-		0.75rem,
-		2.5vw,
-		0.9rem
-	); /* Adjust clamp values if needed */
-	padding: 0.5% 1%; /* Use percentages for responsive padding */
-	margin: 0 auto; /* Center it within the card */
-	opacity: 0.7;
+	text-decoration: none; /* No underline by default */
+	display: block; /* Display as a block for full width */
+	text-align: center; /* Center text within the link */
+	word-break: break-all; /* Break long words to prevent overflow */
+	font-size: clamp(0.75rem, 2.5vw, 0.9rem); /* Responsive font size */
+	padding: 0.5% 1%; /* Responsive padding */
+	margin: 0 auto; /* Center the link horizontally */
+	opacity: 0.7; /* Slightly transparent */
 	cursor: pointer; /* Indicates the link is clickable */
-
-
 }
 
+/* Override styles for the caption link */
 .caption-link {
-	color: rgba(
-		255,
-		255,
-		255,
-		0.7
-	) !important; /* White text with 70% opacity */
+	color: rgba(255, 255, 255, 0.7) !important; /* White text with 70% opacity */
 	/* ... other styles ... */
 }
 
+/* Styles for when the caption card is visible or the card is hovered */
 .caption-card.visible,
 .card:hover .caption-card {
-	opacity: 1;
+	opacity: 1; /* Fully visible */
 }
 
+/* Styles for the caption link on hover, focus, or active states */
 .caption-link:hover,
 .caption-link:focus,
 .caption-link:active {
-	color: white;
+	color: white; /* Full white color */
 }
 
+/* Underline the caption link on hover for better user experience */
 .caption-link:hover {
-    text-decoration: underline; /* Adds underline on hover for better UX */
-	opacity: 1; /* Ensure the link is fully opaque when hovered */
+    text-decoration: underline;
+	opacity: 1; /* Fully opaque */
 }
 
+/* Styles for the caption card when hovered */
 .caption-card.hovered {
-	opacity: 1;
+	opacity: 1; /* Fully visible */
 }
 
-/* Styles for screens wider than 768px */
+/* Responsive styles for different screen widths */
 @media (min-width: 768px) {
 	.caption-card {
-		width: 100%;
-		margin: 0 auto;
+		width: 100%; /* Full width on medium screens */
+		margin: 0 auto; /* Center horizontally */
 	}
 }
 
-/* Styles for screens narrower than 1200px */
 @media (max-width: 1200px) {
 	.caption-card {
-		width: 80%;
-		margin: 0 auto;
-		padding: 0;
+		width: 80%; /* 80% width on large screens */
+		margin: 0 auto; /* Center horizontally */
+		padding: 0; /* No padding */
 	}
 }
 
-/* Styles for screens narrower than 1024px */
 @media (max-width: 1024px) {
 	.caption-card {
-		width: 90%;
-		margin: 0 auto;
-		padding: 0;
+		width: 90%; /* 90% width on medium-large screens */
+		margin: 0 auto; /* Center horizontally */
+		padding: 0; /* No padding */
 	}
 }
 
-/* Styles for screens narrower than 768px */
 @media (max-width: 768px) {
 	.caption-card {
-		width: 100%;
-		margin: 0 auto;
-		padding: 5%;
+		width: 100%; /* Full width on small screens */
+		margin: 0 auto; /* Center horizontally */
+		padding: 5%; /* Padding for smaller screens */
 	}
 }

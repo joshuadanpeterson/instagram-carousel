@@ -1,21 +1,21 @@
-// App.js is the main component of the application. It is responsible for rendering the InstagramFeed component, and displaying the navigation buttons. It also handles the logic for the navigation buttons, and passes the appropriate props to the InstagramFeed component.
+// App.js is the root component of the React application. It orchestrates the layout and state management for the Instagram Carousel app.
 
-// App.js Imports
+// Importing necessary React hooks and components
 import React, { useState, useRef } from 'react';
 import InstagramFeed from './components/js/InstagramFeed';
 import Footer from './components/js/Footer';
 import Header from './components/js/Header';
 import NavButtons from './components/js/NavButtons';
 
+// Importing CSS for App and Navigation Buttons
 import "./App.css";
 import "./components/css/NavigationButtons.css"
 
-// Firebase SDK
+// Importing Firebase SDK for app initialization and analytics
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+// Firebase configuration object containing keys and identifiers for the app
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
@@ -26,36 +26,43 @@ const firebaseConfig = {
   measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID
 };
 
-// Initialize Firebase
+// Initializing Firebase with the provided configuration
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
-// App.js 
+// The main App component definition
 const App = () => {
+  // Access token for the Instagram API
   const accessToken = process.env.REACT_APP_INSTAGRAM_ACCESS_TOKEN;
+  
+  // State hook for autoplay functionality
+  const [isAutoplayed, setIsAutoplayed] = useState(false);
+  // Ref hook to reference the carousel component for controlling navigation
+  const carouselRef = useRef(null);
 
-  const [isAutoplayed, setIsAutoplayed] = useState(false); // Define isAutoplayed state
-  const carouselRef = useRef(null); // Reference to the carousel
-
+  // Function to navigate to the previous slide
   const goToPreviousSlide = () => {
     if (carouselRef.current) {
       carouselRef.current.goToPreviousSlide();
     }
   };
 
+  // Function to navigate to the next slide
   const goToNextSlide = () => {
     if (carouselRef.current) {
       carouselRef.current.goToNextSlide();
     }
   };
 
+  // Function to toggle the autoplay state and control the carousel's play/pause
   const togglePlayPause = () => {
-    setIsAutoplayed(!isAutoplayed); // Toggle the isAutoplayed state
+    setIsAutoplayed(!isAutoplayed);
     if (carouselRef.current) {
       carouselRef.current.togglePlayPause();
     }
   };
 
+  // Rendering the main app structure with header, Instagram feed, navigation buttons, and footer
   return (
     <div className="App">
       <Header />
@@ -84,4 +91,5 @@ const App = () => {
   );
 };
 
+// Exporting App component to be used in index.js
 export default App;

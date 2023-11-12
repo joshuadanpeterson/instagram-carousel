@@ -1,67 +1,60 @@
-/* InstagramFeed.css */
-
+/* Styles for the caption card that appears over the image */
 .caption-card {
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	width: 100%; /* Full width of its container */
-	min-height: 15vh; /* Increase min-height for more text */
-	background: rgba(0, 0, 0, 0.5);
-	color: white;
-	padding: 20px;
-	text-align: center;
-	transition: opacity 0.5s ease;
-	box-sizing: border-box;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	overflow: visible; /* Changed from hidden to visible */
-	white-space: normal; /* Allow text wrapping */
-	word-wrap: break-word; /* Break words to prevent overflow */
-	text-rendering: optimizeLegibility; /* Improve text rendering */
-	transform-style: preserve-3d; /* Preserve 3D for child elements */
-	box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.25); /* Adjust as needed */
+	position: absolute; /* Position it over the image */
+	bottom: 0; /* Align to the bottom of the parent container */
+	left: 0; /* Align to the left of the parent container */
+	width: 100%; /* Stretch to the full width of the parent */
+	min-height: 15vh; /* Minimum height to accommodate text */
+	background: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+	color: white; /* White text color for readability */
+	padding: 20px; /* Padding inside the caption card */
+	text-align: center; /* Center the text horizontally */
+	transition: opacity 0.5s ease; /* Smooth transition for opacity changes */
+	box-sizing: border-box; /* Include padding and border in the element's total width and height */
+	display: flex; /* Use flexbox for layout */
+	flex-direction: column; /* Stack children vertically */
+	justify-content: center; /* Center children vertically */
+	align-items: center; /* Center children horizontally */
+	overflow: visible; /* Allow content to be visible outside the box */
+	white-space: normal; /* Wrap text to the next line */
+	word-wrap: break-word; /* Break words that are too long to fit */
+	text-rendering: optimizeLegibility; /* Improve text legibility */
+	transform-style: preserve-3d; /* Preserve 3D transformations */
+	box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.25); /* Shadow for depth */
 }
 
+/* Ensure the caption card is fully visible when it's active */
 .caption-card.visible {
-	opacity: 1 !important; /* Make sure this overrides any other opacity property */
+	opacity: 1 !important; /* Full opacity */
 }
 
+/* Styles for the caption link */
 .caption-link {
-	color: rgba(255, 255, 255, 0.7); /* White text with 70% opacity */
-	transition: color 0.3s ease, opacity 0.3s ease; /* Smooth transition for color and opacity */
-	text-decoration: none;
-	display: block; /* Ensure it takes up the full width of its container */
-	text-align: center; /* Center the text within the card */
-	word-break: break-all; /* Prevent overflow by breaking long words */
-	font-size: clamp(
-		0.75rem,
-		2.5vw,
-		0.9rem
-	); /* Adjust clamp values if needed */
-	padding: 0.5% 1%; /* Use percentages for responsive padding */
-	margin: 0 auto; /* Center it within the card */
-	opacity: 0.7;
-	pointer-events: auto; /* Add this line */
-
+	color: rgba(255, 255, 255, 0.7); /* White text with 70% opacity for a softer look */
+	transition: color 0.3s ease, opacity 0.3s ease; /* Smooth transitions for hover effects */
+	text-decoration: none; /* No underline on the link */
+	display: block; /* Block display to fill the width of the caption card */
+	text-align: center; /* Center the text */
+	word-break: break-all; /* Ensure long words do not overflow */
+	font-size: clamp(0.75rem, 2.5vw, 0.9rem); /* Responsive font size */
+	padding: 0.5% 1%; /* Responsive padding */
+	margin: 0 auto; /* Center the link within the caption card */
+	opacity: 0.7; /* Slightly transparent text */
+	pointer-events: auto; /* Ensure the link is clickable */
 }
 
+/* Hover, focus, and active states for the caption link */
 .caption-link:hover,
 .caption-link:focus,
 .caption-link:active {
-	color: rgba(
-		255,
-		255,
-		255,
-		1
-	) !important; /* Full white color on hover, focus, and active states */
+	color: rgba(255, 255, 255, 1) !important; /* Full opacity white text on interaction */
 }
 
+/* When the caption card is visible or the slide is hovered, ensure full visibility */
 .caption-card.visible,
 .carousel .slide:hover .caption-card,
 .caption-link:hover {
-	opacity: 1;
-	display: block;
+	opacity: 1; /* Full opacity */
+	display: block; /* Ensure it's displayed */
 	color: rgba(255, 255, 255, 1); /* Full white text color */
 }

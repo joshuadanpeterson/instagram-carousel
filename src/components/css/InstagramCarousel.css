@@ -1,98 +1,106 @@
-/* InstagramCarousel.css */
-
+/* Styles for the main carousel container */
 
 .carousel-container {
-	width: 100%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	height: auto; /* Adjust as needed */
-	margin: auto;
-	position: relative;
+	width: 100%; /* Full width of the parent */
+	display: flex; /* Use flexbox for alignment */
+	justify-content: center; /* Center children horizontally */
+	align-items: center; /* Center children vertically */
+	height: auto; /* Height is responsive to content */
+	margin: auto; /* Center the container within its parent */
+	position: relative; /* Establish a positioning context for absolutely positioned children */
 }
 
+/* Styles for the carousel itself */
 .carousel {
-	width: 100%;
-	max-height: 100%;
-	height: auto;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	overflow: hidden;
-	perspective: 1000px;
+	width: 100%; /* Full width of its container */
+	max-height: 100%; /* Max-height to ensure it doesn't overflow its container */
+	height: auto; /* Height is responsive to content */
+	display: flex; /* Use flexbox for alignment */
+	flex-direction: column; /* Stack children vertically */
+	justify-content: center; /* Center children vertically */
+	align-items: center; /* Center children horizontally */
+	overflow: hidden; /* Hide any overflowing content */
+	perspective: 1000px; /* Perspective for 3D transforms */
 }
 
+/* Styles for individual slides within the carousel */
 .carousel .slide {
-    position: relative;
-	width: 100%;
-	height: auto; /* Make the height responsive */
-    transition: transform 0.5s ease; /* Smooth transition for movement and rotation */
-    opacity: 0.5; /* Make non-current slides less prominent */
+	position: relative; /* Positioned relative to its normal position */
+	width: 100%; /* Full width of its container */
+	height: auto; /* Height is responsive to content */
+	transition: transform 0.5s ease; /* Smooth transition for 3D transforms */
+	opacity: 0.5; /* Dim slides that are not active */
 }
 
-/* Styles for the current slide */
+/* Styles for the active slide */
 .carousel .slide.current {
-    transform: translateZ(100px); /* Brings the current slide forward */
-    opacity: 1; /* Fully opaque */
-    z-index: 1; /* Ensures it appears on top */
+	transform: translateZ(100px); /* Bring the active slide forward */
+	opacity: 1; /* Fully opaque for the active slide */
+	z-index: 1; /* Ensure it stacks above other slides */
 }
 
+/* Styles for images within the carousel */
 .carousel img {
-	position: relative;
-	width: 100%;
-	height: auto;
-	display: block;
-	object-fit: cover;
+	position: relative; /* Positioned relative to its normal position */
+	width: 100%; /* Full width of its container */
+	height: auto; /* Height is responsive to content */
+	display: block; /* Display as block to avoid inline whitespace */
+	object-fit: cover; /* Ensure the image covers the area without distortion */
 }
 
+/* Container for navigation controls */
 .carousel-navigation-container {
-	position: absolute;
-	top: 50%;
+	position: absolute; /* Positioned relative to the carousel container */
+	top: 50%; /* Center vertically */
 	left: 0;
 	right: 0;
-	z-index: 10;
-	text-align: center;
+	z-index: 10; /* Stack above the slides */
+	text-align: center; /* Center the navigation controls */
 }
 
+/* Wrapper for individual slide containers */
 .carousel-slide-container {
-	width: 100%;
-	position: relative;
+	width: 100%; /* Full width of its container */
+	position: relative; /* Establish a positioning context for absolutely positioned children */
 }
 
+/* Styles for the slide immediately before the active slide */
 .carousel-slide.previous {
-	transform: translateX(-100%) translateZ(-100px) rotateY(-30deg); /* Adjust translateX and rotateY as needed */
-	opacity: 0.5; /* Lower opacity for slides not in focus */
+	transform: translateX(-100%) translateZ(-100px) rotateY(-30deg); /* Position it to the left and slightly behind the active slide */
+	opacity: 0.5; /* Dim the slide to indicate it's not active */
 }
 
+/* Styles for the slide immediately after the active slide */
 .carousel-slide.next {
-	transform: translateX(100%) translateZ(-100px) rotateY(30deg); /* Adjust translateX and rotateY as needed */
-	opacity: 0.5; /* Lower opacity for slides not in focus */
+	transform: translateX(100%) translateZ(-100px) rotateY(30deg); /* Position it to the right and slightly behind the active slide */
+	opacity: 0.5; /* Dim the slide to indicate it's not active */
 }
 
+/* Wrapper for the carousel that may include additional elements like buttons */
 .carousel-wrapper {
-	position: relative;
-	padding-bottom: 20px;
-	margin-left: auto;
+	position: relative; /* Positioned relative to its normal position */
+	padding-bottom: 20px; /* Space below the carousel */
+	margin-left: auto; /* Center the wrapper horizontally */
 	margin-right: auto;
-	display: block;
+	display: block; /* Display as block-level element */
 }
 
+/* Styles for buttons within the carousel wrapper */
 .carousel-wrapper button {
-	width: auto;
-	margin-top: 20px;
+	width: auto; /* Width determined by content */
+	margin-top: 20px; /* Space above the button */
 }
 
-/* Ensure the caption card appears on hover over the slide container */
+/* Styles to show the caption when hovering over a slide */
 .carousel-slide-container:hover .caption-card {
-    opacity: 1 !important; /* Full opacity on hover */
-    transform: translateZ(50px); /* Pop out effect on hover */
+	opacity: 1 !important; /* Fully opaque when hovered */
+	transform: translateZ(50px); /* Bring the caption forward on hover */
 }
 
+/* Responsive styles for smaller screens */
 @media (max-width: 768px) {
 	.carousel-container {
-		height: auto; /* On smaller devices, let the height be automatic */
-		min-height: 50vh; /* But ensure it takes at least half the viewport height */
+		height: auto; /* Height is responsive to content */
+		min-height: 50vh; /* At least half the viewport height */
 	}
 }
-

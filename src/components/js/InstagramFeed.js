@@ -1,41 +1,47 @@
-import React, { useState, useEffect, forwardRef, useImperativeHandle } from "react";
-import Carousel from "react-spring-3d-carousel";
-import { v4 as uuidv4 } from "uuid";
-import { config } from "react-spring";
-import { styled } from "@mui/system";
-import { Grid } from "@mui/material";
+import React, {
+	useState,
+	useEffect,
+	forwardRef,
+	useImperativeHandle,
+} from "react";
+import Carousel from "react-spring-3d-carousel"; // 3D carousel component
+import { v4 as uuidv4 } from "uuid"; // UUID for unique key generation
+import { config } from "react-spring"; // Animation configurations
+import { styled } from "@mui/system"; // MUI utility for styling
+import { Grid } from "@mui/material"; // MUI layout component
 
-import PostCard from "./PostCard"; // Import PostCard component
-// 
-import "../css/InstagramCarousel.css";
-import "../css/NavigationButtons.css";
+import PostCard from "./PostCard"; // Custom component for displaying individual posts
+import "../css/InstagramCarousel.css"; // Styles for the carousel
+import "../css/NavigationButtons.css"; // Styles for navigation buttons
 
+// Styled component for the carousel wrapper with MUI's 'styled' utility
 const CarouselWrapper = styled("div")({
 	display: "flex",
-	justifyContent: "center", // Centers the cards horizontally
-	alignItems: "center", // Centers the cards vertically
-	minHeight: "100vh", // Make sure it takes at least the full height of the viewport
-	perspective: "1000px", // Adjust as needed for 3D effect
+	justifyContent: "center", // Centers the carousel horizontally
+	alignItems: "center", // Centers the carousel vertically
+	minHeight: "100vh", // Ensures it takes at least the full height of the viewport
+	perspective: "1000px", // Adds a 3D effect to the carousel
 });
 
+// The InstagramFeed component, using forwardRef to allow parent components to call its methods
 const InstagramFeed = forwardRef(({ accessToken }, ref) => {
+	const [posts, setPosts] = useState([]); // State for storing the posts
+	const [currentSlide, setCurrentSlide] = useState(0); // State for the current slide
+	const [hoveredSlide, setHoveredSlide] = useState(null); // State for the hovered slide
+	const [isAutoplayed, setIsAutoplayed] = useState(true); // State for autoplay functionality
 
-	const [posts, setPosts] = useState([]);
-	const [currentSlide, setCurrentSlide] = useState(0);
-	const [hoveredSlide, setHoveredSlide] = useState(null);
-	const [isAutoplayed, setIsAutoplayed] = useState(true); // Initialize this as true if you want autoplay by default
-
+	// Fetch posts from Instagram on component mount using the provided access token
 	useEffect(() => {
 		fetch(
 			`https://graph.instagram.com/me/media?fields=id,media_type,permalink,media_url,caption&access_token=${accessToken}`
 		)
 			.then((response) => response.json())
 			.then((data) => {
-				setPosts(data.data);
+				setPosts(data.data); // Update the posts state with fetched data
 			});
 	}, [accessToken]);
 
-	// Autoplay functionality
+	// Set up autoplay functionality for the carousel
 	useEffect(() => {
 		let autoplayInterval;
 		if (isAutoplayed && posts.length > 0) {
@@ -45,9 +51,10 @@ const InstagramFeed = forwardRef(({ accessToken }, ref) => {
 				);
 			}, 3000); // Change slide every 3 seconds
 		}
-		return () => clearInterval(autoplayInterval);
+		return () => clearInterval(autoplayInterval); // Clear interval on component unmount
 	}, [isAutoplayed, posts.length, currentSlide]);
 
+	// Handlers for navigating slides manually
 	const goToPreviousSlide = () => {
 		setCurrentSlide(currentSlide > 0 ? currentSlide - 1 : posts.length - 1);
 	};
@@ -56,28 +63,35 @@ const InstagramFeed = forwardRef(({ accessToken }, ref) => {
 		setCurrentSlide((currentSlide + 1) % posts.length);
 	};
 
+	// Handler for toggling autoplay on and off
 	const togglePlayPause = () => {
 		setIsAutoplayed(!isAutoplayed);
 	};
 
+	// Expose methods to parent component via ref for external control
 	useImperativeHandle(ref, () => ({
 		goToPreviousSlide,
 		goToNextSlide,
 		togglePlayPause,
 	}));
 
-	// Modify your slides to use PostCard
+	// Map posts to slides and filter out any null slides
 	const slides = posts
 		.map((post, index) => {
-			if (index === currentSlide) {
+			// Only create slides for the current, previous, and next posts for performance
+			if (
+				index === currentSlide ||
+				index === (currentSlide + 1) % posts.length ||
+				index === (currentSlide - 1 + posts.length) % posts.length
+			) {
 				return {
-					key: uuidv4(),
+					key: uuidv4(), // Unique key for each slide
 					content: (
 						<PostCard
 							post={post}
 							cardSize={{ width: "300%", height: "auto" }}
 							hovered={hoveredSlide === index}
-							isCurrent={true}
+							isCurrent={index === currentSlide}
 							onMouseEnter={() => setHoveredSlide(index)}
 							onMouseLeave={() => setHoveredSlide(null)}
 							onPrevClick={goToPreviousSlide}
@@ -86,41 +100,19 @@ const InstagramFeed = forwardRef(({ accessToken }, ref) => {
 							isAutoplayed={isAutoplayed}
 						/>
 					),
-					onClick: () => setCurrentSlide(index),
-				};
-			} else if (
-				index === (currentSlide + 1) % posts.length ||
-				index === (currentSlide - 1 + posts.length) % posts.length
-			) {
-				return {
-					key: uuidv4(),
-					content: (
-						<PostCard
-							post={post}
-							cardSize={{ width: "300px", height: "auto" }}
-							hovered={hoveredSlide === index}
-							isCurrent={false}
-							onMouseEnter={() => setHoveredSlide(index)}
-							onMouseLeave={() => setHoveredSlide(null)}
-							onPrevClick={goToPreviousSlide}
-							onNextClick={goToNextSlide}
-							onPlayPauseClick={togglePlayPause}
-							isAutoplayed={isAutoplayed}
-						/>
-					),
-					onClick: () => setCurrentSlide(index),
+					onClick: () => setCurrentSlide(index), // Set the current slide on click
 				};
 			} else {
-				return null;
+				return null; // Exclude slides that are not adjacent to the current slide
 			}
 		})
-		.filter((slide) => slide !== null); // Filter out null slides
+		.filter((slide) => slide !== null); // Remove any null slides to prevent errors
 
 	return (
 		<CarouselWrapper style={{ marginLeft: "auto", marginRight: "auto" }}>
 			<Grid
 				container
-				spacing={2} // Use a number for spacing
+				spacing={2} // Grid spacing for layout consistency
 				justifyContent="center"
 				alignItems="center"
 				style={{ height: "100%" }}
@@ -131,7 +123,7 @@ const InstagramFeed = forwardRef(({ accessToken }, ref) => {
 					offsetRadius={2}
 					showNavigation={false}
 					animationConfig={config.gentle}
-					autoPlay={isAutoplayed} // Use the state variable here
+					autoPlay={isAutoplayed} // Autoplay state passed to the Carousel component
 				/>
 			</Grid>
 		</CarouselWrapper>

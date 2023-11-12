@@ -1,27 +1,28 @@
-/* Footer.css */
-
+/* General styles for the footer container */
 .footer {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	padding: 25px 50px;
-	background-color: #333;
-	color: #fff;
-	margin-top: 0; /* Pushes the footer to the bottom */
+	display: flex; /* Use flexbox for layout */
+	justify-content: space-between; /* Space out child elements */
+	align-items: center; /* Vertically center child elements */
+	padding: 25px 50px; /* Padding inside the footer */
+	background-color: #333; /* Dark background for the footer */
+	color: #fff; /* White text color */
+	margin-top: 0; /* No top margin to keep the footer at the bottom */
 }
 
+/* Styles for social media icons and links */
 .social-media-icons a {
-	color: #fff;
-	margin: 0 10px;
-	transition: color 0.3s ease;
+	color: #fff; /* White color for icons */
+	margin: 0 10px; /* Horizontal spacing between icons */
+	transition: color 0.3s ease; /* Smooth transition for color change */
 }
 
+/* Hover effect for social media links */
 .social-media-icons a:hover {
-	color: #999;
+	color: #999; /* Lighten the icon color on hover */
 }
 
-/* Adjust the size of the icons as needed */
+/* Size adjustments for the SVG icons */
 .social-media-icons svg {
-	width: 24px;
-	height: 24px;
+	width: 24px; /* Fixed width for icons */
+	height: 24px; /* Fixed height for icons */
 }

@@ -1,22 +1,21 @@
-/* Header.css */
-
+/* General styles for the header container */
 .header {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	width: 100%;
-	padding: 30px 0;
-	background-color: #f3f4f6;
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-	margin-bottom: 0; /* Reduce or remove the margin at the bottom of the header */
+	display: flex; /* Use flexbox for alignment */
+	flex-direction: column; /* Stack children vertically */
+	align-items: center; /* Center children horizontally */
+	justify-content: center; /* Center children vertically */
+	width: 100%; /* Full width of its container */
+	padding: 30px 0; /* Padding at the top and bottom */
+	background-color: #f3f4f6; /* Light grey background */
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+	margin-bottom: 0; /* No margin at the bottom to keep it flush with the next element */
 }
 
+/* Styles for the title inside the header */
 .header-title {
-	margin: 0;
-	color: #333; /* or any color that fits your design */
-	font-size: 2.5rem;
-	/* bold font */
-	font-family: 'Montserrat', sans-serif;
-	font-family: 'Space Grotesk', sans-serif;
+	margin: 0; /* No margin to keep the title aligned with the header's padding */
+	color: #333; /* Dark grey color for the text */
+	font-size: 2.5rem; /* Large font size for the title */
+	font-family: 'Montserrat', sans-serif; /* Primary font family */
+	font-family: 'Space Grotesk', sans-serif; /* Secondary font family as a fallback */
 }

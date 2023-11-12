@@ -1,56 +1,59 @@
 /* App.css */
 
+/* Main container for the app */
 .App {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 105vh; /* This is the default height */
+  height: 105vh; /* This is the default height, slightly taller than the full viewport to accommodate content */
 }
 
-
+/* Container for the Instagram feed component */
 .InstagramFeed-container {
-	flex-grow: 1;
+	flex-grow: 1; /* Allows the container to expand to fill available space */
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	padding: 50px 0;
-  padding: 12%;
-	margin: 50px 0;
-  margin-right: 15%;
-  padding-right: 22%;
-	overflow: hidden;
-	z-index: 1;
-  perspective: 1000px; /* Apply a perspective to give a sense of depth */
+	justify-content: center; /* Centers content vertically in the container */
+	align-items: center; /* Centers content horizontally in the container */
+	padding: 50px 0; /* Adds padding at the top and bottom */
+  padding: 12%; /* Overrides previous padding with a percentage-based value for responsiveness */
+	margin: 50px 0; /* Adds margin at the top and bottom */
+  margin-right: 15%; /* Adds margin to the right */
+  padding-right: 22%; /* Adds padding to the right */
+	overflow: hidden; /* Hides any content that overflows the container's bounds */
+	z-index: 1; /* Ensures the container stacks on top of any other positioned elements */
+  perspective: 1000px; /* Apply a perspective to give a sense of depth to 3D-transformed children */
 }
 
+/* Styling for the Instagram feed itself */
 .InstagramFeed {
-	width: 75%;
-  height: 115vh; 
-	max-width: 600px;
-	margin: auto;
-  transform-style: preserve-3d; /* This ensures that child elements maintain the 3D space */
+	width: 75%; /* Sets the width to 75% of the parent container */
+  height: 115vh; /* Sets a fixed height, taller than the full viewport */
+	max-width: 600px; /* Ensures the feed does not exceed 600px in width */
+	margin: auto; /* Centers the feed horizontally in the parent container */
+  transform-style: preserve-3d; /* Ensures that child elements maintain the 3D space */
 }
 
-/* NavButtons */
+/* Container for navigation buttons */
 .NavButtons-container {
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  margin-top:-2.5%;
-  margin-bottom: 2.4%; /* Adjust as needed */
-  margin-right: 25%;
-  margin-left: 26.5%;
-  /* position at bottom below InstagramFeed */
-  position: relative;
+  justify-content: center; /* Centers the buttons horizontally */
+  align-items: center; /* Centers the buttons vertically */
+  margin-top:-2.5%; /* Negative margin to pull the buttons up */
+  margin-bottom: 2.4%; /* Adds margin below the buttons */
+  margin-right: 25%; /* Adds margin to the right */
+  margin-left: 26.5%; /* Adds margin to the left */
+  position: relative; /* Positions the buttons relative to their normal flow */
 }
+
+/* Media queries for responsive adjustments */
 
 /* Adjustments for tablets */
 @media (max-width: 768px) {
   .App, .InstagramFeed-container, .InstagramFeed, .NavButtons-container {
     height: auto; /* Allow content to determine the height */
-    padding-bottom: 50px; /* Add some space at the bottom */
+    padding-bottom: 50px; /* Add some space at the bottom for smaller devices */
   }
 }
 
@@ -58,7 +61,7 @@
 @media (max-width: 600px) {
   .App, .InstagramFeed-container, .InstagramFeed, .NavButtons-container {
     height: auto; /* Allow content to determine the height */
-    padding-bottom: 30px; /* Add some space at the bottom */
+    padding-bottom: 30px; /* Add some space at the bottom for medium-sized devices */
   }
 }
 
@@ -66,7 +69,6 @@
 @media (max-width: 480px) {
   .App, .InstagramFeed-container, .InstagramFeed, .NavButtons-container {
     height: auto; /* Allow content to determine the height */
-    padding-bottom: 20px; /* Add some space at the bottom */
+    padding-bottom: 20px; /* Add some space at the bottom for small devices */
   }
 }
-

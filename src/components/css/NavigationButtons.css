@@ -1,83 +1,83 @@
-/* Navigation Buttons Styles */
-
+/* General styles for navigation buttons within the carousel */
 
 /* Play/Pause Button */
 .play-pause-button {
-	display: none;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	background-color: rgba(255, 255, 255, 0.3); /* Slightly transparent white */	
-	border: none;
-	border-radius: 50%; /* Circular button */
-	width: 35px; /* Fixed size */
-	height: 35px; /* Fixed size */
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	font-size: 2rem;
-	color: rgba(45, 6, 6, 0.344);	
-	cursor: pointer;
-	z-index: 10;
-	font-size: 38px;
-	margin-top: 10px;
+	display: none; /* Hidden by default */
+	position: absolute; /* Positioned relative to its nearest positioned ancestor */
+	top: 50%; /* Center vertically */
+	left: 50%; /* Center horizontally */
+	transform: translate(-50%, -50%); /* Offset the button to be truly centered */
+	background-color: rgba(255, 255, 255, 0.3); /* Semi-transparent white background */
+	border: none; /* No border */
+	border-radius: 50%; /* Rounded edges for a circular shape */
+	width: 35px; /* Fixed width */
+	height: 35px; /* Fixed height */
+	display: flex; /* Use flexbox for centering content */
+	align-items: center; /* Center content vertically */
+	justify-content: center; /* Center content horizontally */
+	font-size: 2rem; /* Large font size for icon */
+	color: rgba(45, 6, 6, 0.344); /* Semi-transparent color for the icon */
+	cursor: pointer; /* Cursor indicates a clickable button */
+	z-index: 10; /* Ensure the button is above other elements */
+	font-size: 38px; /* Set the font size for the icon */
+	margin-top: 10px; /* Space above the button */
 }
 
 .play-pause-button:hover {
-	background-color: rgba(132, 126, 126, 0.499); /* Slightly darker on hover */
+	background-color: rgba(132, 126, 126, 0.499); /* Darker background on hover for visual feedback */
 }
 
-/* Show the button when the slide is hovered */
+/* Show the play/pause button when the carousel slide is hovered */
 .carousel-slide-container:hover .play-pause-button {
-	display: block;
+	display: block; /* Make the button visible */
 }
 
+/* Styles to hide or show the play/pause button programmatically */
 .play-pause-button.hidden {
-	display: none;
+	display: none; /* Hide the button */
 }
 
 .play-pause-button.visible {
-	display: block; /* or 'inline-block', depending on your design */
+	display: block; /* Show the button */
 }
 
-/* Base styles for both buttons */
+/* Base styles for navigation buttons (previous and next) */
 .slide-nav-button {
-	display: flex; /* Change this to always display the buttons */
-	position: absolute;
-	top: 50%;
-	transform: translateY(-50%);
-	background-color: rgba(48, 2, 2, 0.1); /* Slightly transparent white */
-	color: rgba(45, 6, 6, 0.344);	
-	border: none;
-	border-radius: 50%;
-	width: 40px;
-	height: 35px;
-	align-items: center;
-	justify-content: center;
-	cursor: pointer;
-	z-index: 10;
-	font-size: 38px;
-	margin-top: 10px;
+	display: flex; /* Use flexbox for centering content */
+	position: absolute; /* Positioned relative to its nearest positioned ancestor */
+	top: 50%; /* Center vertically */
+	transform: translateY(-50%); /* Offset the button to be truly centered vertically */
+	background-color: rgba(48, 2, 2, 0.1); /* Semi-transparent background */
+	color: rgba(45, 6, 6, 0.344); /* Semi-transparent color for the icon */
+	border: none; /* No border */
+	border-radius: 50%; /* Rounded edges for a circular shape */
+	width: 40px; /* Fixed width */
+	height: 35px; /* Fixed height */
+	align-items: center; /* Center content vertically */
+	justify-content: center; /* Center content horizontally */
+	cursor: pointer; /* Cursor indicates a clickable button */
+	z-index: 10; /* Ensure the button is above other elements */
+	font-size: 38px; /* Set the font size for the icon */
+	margin-top: 10px; /* Space above the button */
 }
 
+/* Override to ensure visibility when needed */
 .slide-nav-button.visible {
-	display: flex !important; /* Make sure this overrides any other display property */
+	display: flex !important; /* Force the button to be visible */
 }
 
-/* Specific styles for previous button */
+/* Specific styles for the previous button */
 .slide-nav-button.prev-button {
-	left: 10%; /* Adjust as needed */
+	left: 10%; /* Position from the left */
 }
 
-/* Specific styles for next button */
+/* Specific styles for the next button */
 .slide-nav-button.next-button {
-	right: 10%; /* Adjust as needed */
+	right: 10%; /* Position from the right */
 }
 
-/* Show the navigation buttons when the slide is hovered */
+/* Hover styles for navigation buttons */
 .carousel-slide-container:hover .slide-nav-button:hover {
-	display: flex;
-	background-color: rgba(132, 126, 126, 0.499); /* Slightly darker on hover */
+	display: flex; /* Ensure the button is visible */
+	background-color: rgba(132, 126, 126, 0.499); /* Darker background on hover for visual feedback */
 }
-
