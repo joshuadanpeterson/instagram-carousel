@@ -167,7 +167,7 @@ Distributed under the MIT License. See [[LICENSE]] for more information.
 
 ## Contact
 
-Joshua Peterson - joshuadanpeterson@gmail.com
+Josh Peterson - [joshuadanpeterson@gmail.com](mailto:joshuadanpeterson@gmail.com?subject=Regarding%20Instagram%20Carousel%20GitHub%20Question)
 
 Project Link: [https://github.com/joshuadanpeterson/instagram-carousel](https://github.com/joshuadanpeterson/instagram-carousel)
 
