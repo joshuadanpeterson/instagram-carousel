@@ -151,6 +151,48 @@ To start the application, run:
 
 This will launch the app in development mode. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
+## Firebase Deployment
+
+The Instagram Carousel app is deployed using Firebase Hosting, which provides fast and secure hosting for web app content. The app is accessible at the following URL: [https://instagram-carousel-c16b6.web.app/](https://instagram-carousel-c16b6.web.app/).
+
+### Steps to Deploy to Firebase
+
+To deploy the app to Firebase, follow these steps:
+
+1. **Set up Firebase:**
+   - Install the Firebase CLI globally by running `npm install -g firebase-tools`.
+   - Authenticate to Firebase using `firebase login` and follow the on-screen instructions.
+
+2. **Initialize Firebase in your project:**
+   - Run `firebase init` in the root of your project directory.
+   - Select `Hosting` when prompted for which Firebase features you want to set up.
+   - Choose the Firebase project you want to connect to (in this case, `instagram-carousel-c16b6`).
+   - Specify `build` as your public directory, which is where the build artifacts are located after running the build script.
+   - Configure as a single-page app by responding `yes` when asked.
+
+3. **Build your project:**
+   - Run `npm run build` to create a production build of your app.
+
+4. **Deploy to Firebase:**
+   - Execute `firebase deploy` to deploy your app to Firebase Hosting.
+
+After these steps, your app should be live at the provided Firebase URL.
+
+### Continuous Deployment with GitHub Actions
+
+This project is configured with GitHub Actions for continuous deployment. When changes are merged into the main branch, the app is automatically built and deployed to Firebase Hosting. The workflow is defined in the `.github/workflows/firebase-hosting-merge.yml` file.
+
+For more details on Firebase Hosting and GitHub Actions integration, refer to the [Firebase documentation](https://firebase.google.com/docs/hosting/github-integration).
+
+### Local Development
+
+For local development, you can serve your app using Firebase Emulators to replicate the hosting environment on your local machine:
+
+- Run `firebase emulators:start` to start the emulator.
+- Access the app at the local URL provided by the Firebase CLI.
+
+This allows you to test your changes in an environment similar to the production Firebase Hosting environment before deploying them.
+
 ## Contributing
 
 Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
