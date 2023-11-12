@@ -20,6 +20,7 @@
 .DS_Store
 .env*
 !.env.example  # Uncomment if you provide an .env.example file
+*.txt
 
 # local env files
 *.local
