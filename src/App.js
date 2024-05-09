@@ -13,7 +13,7 @@ import "./components/css/NavigationButtons.css";
 
 // Importing Firebase SDK for app initialization and analytics
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
+import { getAnalytics, logEvent } from "firebase/analytics";
 
 // Firebase configuration object containing keys and identifiers for the app
 const firebaseConfig = {
@@ -40,18 +40,13 @@ const App = () => {
   // Ref hook to reference the carousel component for controlling navigation
   const carouselRef = useRef(null);
 
-  // Function to navigate to the previous slide
-  const goToPreviousSlide = () => {
-    if (carouselRef.current) {
-      carouselRef.current.goToPreviousSlide();
-    }
-  };
-
-  // Function to navigate to the next slide
-  const goToNextSlide = () => {
-    if (carouselRef.current) {
-      carouselRef.current.goToNextSlide();
-    }
+  // Function to log autoplay toggle events
+  const logAutoplayEvent = (isAutoplaying) => {
+    logEvent(analytics, "autoplay_toggle", {
+      event_category: "Autoplay",
+      event_label: isAutoplaying ? "Autoplay On" : "Autoplay Off",
+      value: isAutoplaying ? 1 : 0,
+    });
   };
 
   // Function to toggle the autoplay state and control the carousel's play/pause
@@ -59,6 +54,30 @@ const App = () => {
     setIsAutoplayed(!isAutoplayed);
     if (carouselRef.current) {
       carouselRef.current.togglePlayPause();
+      logAutoplayEvent(!isAutoplayed); // Log the state change
+    }
+  };
+
+  // Function to log navigation button clicks
+  const logNavigationEvent = (buttonName) => {
+    logEvent(analytics, "navigation_click", {
+      event_category: "Navigation Buttons",
+      event_label: buttonName,
+      value: 1,
+    });
+  };
+
+  const goToPreviousSlide = () => {
+    if (carouselRef.current) {
+      carouselRef.current.goToPreviousSlide();
+      logNavigationEvent("Previous Slide"); // Log the button click
+    }
+  };
+
+  const goToNextSlide = () => {
+    if (carouselRef.current) {
+      carouselRef.current.goToNextSlide();
+      logNavigationEvent("Next Slide"); // Log the button click
     }
   };
 
