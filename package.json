@@ -52,15 +52,8 @@
     ]
   },
   "devDependencies": {
-<<<<<<< HEAD
     "@babel/plugin-proposal-private-property-in-object": "^7.16.7",
     "eslint": "^8.57.0",
     "eslint-config-react-app": "^7.0.1"
-||||||| 8e2d111 (Added firebase.config.js and jshintrc)
-    "@babel/plugin-proposal-private-property-in-object": "^7.16.7",
-    "eslint": "^9.0.0"
-=======
-    "@babel/plugin-proposal-private-property-in-object": "^7.16.7"
->>>>>>> parent of 8e2d111 (Added firebase.config.js and jshintrc)
   }
 }
