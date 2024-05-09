@@ -15,6 +15,6 @@ jobs:
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_INSTAGRAM_CAROUSEL_F95BB }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_INSTAGRAM_CAROUSEL_C16B6 }}'
           channelId: live
-          projectId: instagram-carousel-f95bb
+          projectId: instagram-carousel-c16b6
