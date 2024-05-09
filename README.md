@@ -125,7 +125,7 @@ To get a local copy up and running follow these simple steps.
 - npm
   ```sh
   npm install npm@latest -g
-  ``` 
+  ```
 
 ### Installation
 
@@ -166,7 +166,7 @@ To deploy the app to Firebase, follow these steps:
 2. **Initialize Firebase in your project:**
    - Run `firebase init` in the root of your project directory.
    - Select `Hosting` when prompted for which Firebase features you want to set up.
-   - Choose the Firebase project you want to connect to (in this case, `instagram-carousel-c16b6`).
+   - Choose the Firebase project you want to connect to (in this case, `instagram-carousel-f95bb`).
    - Specify `build` as your public directory, which is where the build artifacts are located after running the build script.
    - Configure as a single-page app by responding `yes` when asked.
 
