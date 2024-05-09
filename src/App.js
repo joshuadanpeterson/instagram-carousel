@@ -1,15 +1,15 @@
 // App.js is the root component of the React application. It orchestrates the layout and state management for the Instagram Carousel app.
 
 // Importing necessary React hooks and components
-import React, { useState, useRef } from 'react';
-import InstagramFeed from './components/js/InstagramFeed';
-import Footer from './components/js/Footer';
-import Header from './components/js/Header';
-import NavButtons from './components/js/NavButtons';
+import React, { useState, useRef } from "react";
+import InstagramFeed from "./components/js/InstagramFeed";
+import Footer from "./components/js/Footer";
+import Header from "./components/js/Header";
+import NavButtons from "./components/js/NavButtons";
 
 // Importing CSS for App and Navigation Buttons
 import "./App.css";
-import "./components/css/NavigationButtons.css"
+import "./components/css/NavigationButtons.css";
 
 // Importing Firebase SDK for app initialization and analytics
 import { initializeApp } from "firebase/app";
@@ -23,7 +23,7 @@ const firebaseConfig = {
   storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
   messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
   appId: process.env.REACT_APP_FIREBASE_APP_ID,
-  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID
+  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
 };
 
 // Initializing Firebase with the provided configuration
@@ -34,7 +34,7 @@ const analytics = getAnalytics(app);
 const App = () => {
   // Access token for the Instagram API
   const accessToken = process.env.REACT_APP_INSTAGRAM_ACCESS_TOKEN;
-  
+
   // State hook for autoplay functionality
   const [isAutoplayed, setIsAutoplayed] = useState(false);
   // Ref hook to reference the carousel component for controlling navigation
@@ -87,9 +87,9 @@ const App = () => {
       <Header />
       <div className="InstagramFeed-container">
         <div className="InstagramFeed">
-          <InstagramFeed 
-            accessToken={accessToken} 
-            ref={carouselRef} 
+          <InstagramFeed
+            accessToken={accessToken}
+            ref={carouselRef}
             onPrevClick={goToPreviousSlide}
             onNextClick={goToNextSlide}
             onPlayPauseClick={togglePlayPause}
@@ -98,11 +98,11 @@ const App = () => {
         </div>
       </div>
       <div className="NavButtons-container">
-        <NavButtons 
+        <NavButtons
           onPrevClick={goToPreviousSlide}
           onNextClick={goToNextSlide}
           onPlayPauseClick={togglePlayPause}
-          isAutoplaying={isAutoplayed}      
+          isAutoplaying={isAutoplayed}
         />
       </div>
       <Footer />
