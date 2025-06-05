@@ -1,6 +1,12 @@
 
 # Instagram Carousel
 
+<div>
+   <a href="https://deepwiki.com/joshuadanpeterson/instagram-carousel">
+      <img src="https://deepwiki.com/badge.svg" alt="Ask DeepWiki">
+   </a>
+</div>
+
 Instagram Carousel is a React-based web application that simulates the engaging carousel feature found on Instagram. Enhanced with a 3D perspective for a more immersive viewing experience, this app dynamically pulls the latest photos from an Instagram account using the Instagram Basic Display API, ensuring that users always have access to the most recent content.
 
 ![](assets/screenshot2.png)
